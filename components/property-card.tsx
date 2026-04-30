@@ -18,6 +18,8 @@ export function PropertyCard({ property }: PropertyCardProps) {
               src={property.images[0]}
               alt={property.title}
               className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+              loading="lazy"
+              decoding="async"
             />
           ) : (
             <div className="flex h-full w-full items-center justify-center bg-[radial-gradient(circle_at_top,_rgba(217,177,95,0.18),_transparent_35%),linear-gradient(160deg,#1c1c1c,#0d0d0d)]">

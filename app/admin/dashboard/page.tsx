@@ -134,14 +134,14 @@ export default function AdminDashboard() {
         <AdminNav />
 
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <h1 className="text-4xl font-bold text-black">Admin Dashboard</h1>
+            <h1 className="text-3xl font-bold text-black sm:text-4xl">Admin Dashboard</h1>
             <p className="text-gray-600 mt-2">Manage properties and verify listings</p>
           </div>
           <Link
             href="/admin/properties/new"
-            className="flex items-center gap-2 px-6 py-3 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold rounded-lg transition-colors"
+            className="flex w-full items-center justify-center gap-2 rounded-lg bg-yellow-500 px-6 py-3 font-semibold text-black transition-colors hover:bg-yellow-600 sm:w-auto"
           >
             <Plus className="w-5 h-5" />
             Add Property
@@ -176,12 +176,12 @@ export default function AdminDashboard() {
         )}
 
         {/* Filters */}
-        <div className="flex gap-4 mb-6">
+        <div className="mb-6 flex flex-wrap gap-3">
           {(['all', 'pending', 'verified', 'rejected'] as const).map(f => (
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+              className={`rounded-lg px-4 py-2 font-medium transition-colors ${
                 filter === f
                   ? 'bg-yellow-500 text-black'
                   : 'bg-white text-gray-700 border border-gray-200 hover:border-gray-300'

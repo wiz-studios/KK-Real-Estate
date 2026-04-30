@@ -77,13 +77,13 @@ export function OwnerLeadForm() {
   return (
     <div className="surface-panel p-6 sm:p-8">
       {successId && (
-        <div className="mb-6 rounded-[1.5rem] border border-green-400/20 bg-green-400/10 px-5 py-4 text-sm text-green-100">
+        <div aria-live="polite" className="mb-6 rounded-[1.5rem] border border-green-400/20 bg-green-400/10 px-5 py-4 text-sm text-green-100">
           Your property lead has been submitted. Reference ID: {successId}
         </div>
       )}
 
       {error && (
-        <div className="mb-6 rounded-[1.5rem] border border-red-400/20 bg-red-400/10 px-5 py-4 text-sm text-red-100">
+        <div aria-live="polite" className="mb-6 rounded-[1.5rem] border border-red-400/20 bg-red-400/10 px-5 py-4 text-sm text-red-100">
           {error}
         </div>
       )}
@@ -95,11 +95,13 @@ export function OwnerLeadForm() {
               Name
             </label>
             <input
+              id="owner-lead-name"
               name="name"
               value={formData.name}
               onChange={handleChange}
               className={inputClassName}
               placeholder="Your full name"
+              autoComplete="name"
               required
             />
           </div>
@@ -109,11 +111,15 @@ export function OwnerLeadForm() {
               Phone
             </label>
             <input
+              id="owner-lead-phone"
+              type="tel"
               name="phone"
               value={formData.phone}
               onChange={handleChange}
               className={inputClassName}
               placeholder="07XXXXXXXX"
+              autoComplete="tel"
+              inputMode="tel"
               required
             />
           </div>
@@ -125,11 +131,13 @@ export function OwnerLeadForm() {
               Property location
             </label>
             <input
+              id="owner-lead-location"
               name="propertyLocation"
               value={formData.propertyLocation}
               onChange={handleChange}
               className={inputClassName}
               placeholder="Estate, town, county"
+              autoComplete="street-address"
               required
             />
           </div>
@@ -139,12 +147,15 @@ export function OwnerLeadForm() {
               Price
             </label>
             <input
+              id="owner-lead-price"
               type="number"
               name="price"
               value={formData.price}
               onChange={handleChange}
               className={inputClassName}
               placeholder="Expected price in KES"
+              inputMode="numeric"
+              min="0"
               required
             />
           </div>
@@ -156,6 +167,7 @@ export function OwnerLeadForm() {
               Plot size
             </label>
             <input
+              id="owner-lead-plot-size"
               name="plotSize"
               value={formData.plotSize}
               onChange={handleChange}
@@ -169,12 +181,14 @@ export function OwnerLeadForm() {
               Bedrooms
             </label>
             <input
+              id="owner-lead-bedrooms"
               type="number"
               min="0"
               name="bedrooms"
               value={formData.bedrooms}
               onChange={handleChange}
               className={inputClassName}
+              inputMode="numeric"
               required
             />
           </div>
@@ -184,12 +198,14 @@ export function OwnerLeadForm() {
               Bathrooms
             </label>
             <input
+              id="owner-lead-bathrooms"
               type="number"
               min="0"
               name="bathrooms"
               value={formData.bathrooms}
               onChange={handleChange}
               className={inputClassName}
+              inputMode="numeric"
               required
             />
           </div>
@@ -218,7 +234,7 @@ export function OwnerLeadForm() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#d9b15f] px-7 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-[#111111] disabled:opacity-60"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#d9b15f] px-7 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-[#111111] disabled:opacity-60 sm:w-auto"
             >
               {isSubmitting ? 'Submitting...' : 'Submit Your Property Now'}
               <ArrowRight className="h-4 w-4" />
@@ -227,7 +243,7 @@ export function OwnerLeadForm() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/14 px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white/82 transition-colors hover:border-[#d9b15f]/35 hover:text-[#f2dca3]"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/14 px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white/82 transition-colors hover:border-[#d9b15f]/35 hover:text-[#f2dca3] sm:w-auto"
             >
               <MessageCircleMore className="h-4 w-4" />
               Talk to Us on WhatsApp

@@ -68,7 +68,152 @@ export function PropertyList({ properties, isLoading, onDelete }: PropertyListPr
   }
 
   return (
-    <div className="overflow-x-auto">
+    <>
+      <div className="space-y-4 p-4 md:hidden">
+        {properties.map((property) => {
+          const submissionDetails = parseSubmissionContactDetails(property.verificationNotes);
+
+          return (
+            <article key={property.id} className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
+              <div className="flex gap-4">
+                <div className="h-20 w-24 shrink-0 overflow-hidden rounded-xl border border-gray-200 bg-gray-100">
+                  {property.images?.[0] ? (
+                    <img
+                      src={property.images[0]}
+                      alt={property.title}
+                      className="h-full w-full object-cover"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : null}
+                </div>
+
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <p className="text-sm font-semibold text-gray-900">{property.title}</p>
+                    <span
+                      className={`rounded-full px-2.5 py-1 text-xs font-semibold ${
+                        submissionDetails.isPublicSubmission
+                          ? 'bg-amber-100 text-amber-800'
+                          : submissionDetails.isOwnerLead
+                            ? 'bg-indigo-100 text-indigo-800'
+                            : submissionDetails.isShowcaseLead
+                              ? 'bg-blue-100 text-blue-800'
+                              : 'bg-slate-100 text-slate-700'
+                      }`}
+                    >
+                      {submissionDetails.isPublicSubmission
+                        ? 'Public submission'
+                        : submissionDetails.isOwnerLead
+                          ? 'Owner lead'
+                          : submissionDetails.isShowcaseLead
+                            ? 'Showcase inquiry'
+                            : 'Admin added'}
+                    </span>
+                  </div>
+
+                  <p className="mt-2 text-sm text-gray-600">
+                    {property.city}, {property.county || 'No county'}
+                  </p>
+                  <p className="mt-1 text-xs uppercase tracking-[0.2em] text-gray-400">
+                    {property.propertyType}
+                  </p>
+                  <div className="mt-3">{getStatusBadge(property.verificationStatus)}</div>
+                </div>
+              </div>
+
+              <div className="mt-4 grid gap-4 rounded-2xl border border-gray-200 bg-gray-50 p-4">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">Contact</p>
+                  <div className="mt-2 space-y-2 text-sm text-gray-700">
+                    {submissionDetails.contactName && (
+                      <div className="flex items-center gap-2">
+                        <UserRound className="h-4 w-4 text-gray-400" />
+                        <span>{submissionDetails.contactName}</span>
+                      </div>
+                    )}
+                    {submissionDetails.contactEmail && (
+                      <div className="flex items-center gap-2">
+                        <Mail className="h-4 w-4 text-gray-400" />
+                        <span className="break-all">{submissionDetails.contactEmail}</span>
+                      </div>
+                    )}
+                    {submissionDetails.contactPhone && (
+                      <div className="flex items-center gap-2">
+                        <Phone className="h-4 w-4 text-gray-400" />
+                        <span>{submissionDetails.contactPhone}</span>
+                      </div>
+                    )}
+                    {!submissionDetails.contactName && !submissionDetails.contactEmail && !submissionDetails.contactPhone && (
+                      <p className="text-sm text-gray-400">No public submission contact saved.</p>
+                    )}
+                  </div>
+                </div>
+
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">Price / Specs</p>
+                  <p className="mt-2 font-semibold text-gray-900">KES {property.price?.toLocaleString()}</p>
+                  <p className="mt-1 text-sm text-gray-600">
+                    {property.bedrooms} bed, {property.bathrooms} bath, {property.totalRooms} rooms
+                  </p>
+                </div>
+
+                {property.latestInquiry && (
+                  <div className="rounded-xl border border-gray-200 bg-white p-3">
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">Latest inquiry</p>
+                    <p className="mt-2 text-sm font-medium text-gray-900">
+                      {property.latestInquiry.name || property.latestInquiry.email || 'Lead contact'}
+                    </p>
+                    {property.latestInquiry.phone && (
+                      <p className="mt-1 text-sm text-gray-600">{property.latestInquiry.phone}</p>
+                    )}
+                    {property.latestInquiry.message && (
+                      <p className="mt-2 text-sm text-gray-600">{property.latestInquiry.message}</p>
+                    )}
+                  </div>
+                )}
+
+                <div className="flex flex-wrap items-center gap-3 text-sm text-gray-600">
+                  <div className="flex items-center gap-2">
+                    <Eye className="h-4 w-4 text-gray-400" />
+                    <span>{property.viewsCount} views</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <MessageSquare className="h-4 w-4 text-gray-400" />
+                    <span>{property.inquiryCount || 0} inquiries</span>
+                  </div>
+                </div>
+
+                {submissionDetails.ownerNotes && (
+                  <p className="text-sm text-gray-500">{submissionDetails.ownerNotes}</p>
+                )}
+              </div>
+
+              <div className="mt-4 flex flex-wrap items-center gap-4 text-sm">
+                <Link href={`/admin/properties/${property.id}/edit`} className="font-medium text-yellow-600 hover:text-yellow-700">
+                  Edit
+                </Link>
+                <button
+                  onClick={() => onDelete?.(property.id)}
+                  className="font-medium text-red-600 hover:text-red-700"
+                >
+                  Delete
+                </button>
+                {property.verificationStatus === 'pending' && (
+                  <Link
+                    href={`/admin/properties/${property.id}/verify`}
+                    className="font-medium text-blue-600 hover:text-blue-700"
+                  >
+                    Verify
+                  </Link>
+                )}
+              </div>
+            </article>
+          );
+        })}
+      </div>
+
+      <div className="hidden overflow-x-auto md:block">
       <table className="w-full min-w-[1100px]">
         <thead className="border-b border-gray-200 bg-gray-50">
           <tr>
@@ -94,6 +239,8 @@ export function PropertyList({ properties, isLoading, onDelete }: PropertyListPr
                           src={property.images[0]}
                           alt={property.title}
                           className="h-full w-full object-cover"
+                          loading="lazy"
+                          decoding="async"
                         />
                       ) : null}
                     </div>
@@ -236,6 +383,7 @@ export function PropertyList({ properties, isLoading, onDelete }: PropertyListPr
           })}
         </tbody>
       </table>
-    </div>
+      </div>
+    </>
   );
 }

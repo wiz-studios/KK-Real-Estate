@@ -103,7 +103,7 @@ export default function AdminInquiriesPage() {
 
         <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <h1 className="text-4xl font-bold text-black">Admin Inquiries</h1>
+            <h1 className="text-3xl font-bold text-black sm:text-4xl">Admin Inquiries</h1>
             <p className="mt-2 text-gray-600">Every viewing request and lead in one place.</p>
           </div>
 
@@ -172,6 +172,8 @@ export default function AdminInquiriesPage() {
                             src={inquiry.propertyImage}
                             alt={inquiry.propertyTitle}
                             className="h-full w-full object-cover"
+                            loading="lazy"
+                            decoding="async"
                           />
                         ) : null}
                       </div>

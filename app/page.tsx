@@ -80,7 +80,7 @@ export default function HomePage() {
               </div>
 
               <div className="space-y-6">
-                <h1 className="font-display text-6xl leading-[0.9] text-white sm:text-7xl lg:text-[5.5rem]">
+                <h1 className="font-display text-[3.85rem] leading-[0.92] text-white sm:text-7xl lg:text-[5.5rem]">
                   Verified homes for buyers who move with{' '}
                   <span className="gold-gradient-text">clarity.</span>
                 </h1>
@@ -181,7 +181,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section id="experience" className="border-b border-white/6 py-20 lg:py-24">
+        <section id="experience" className="scroll-mt-28 border-b border-white/6 py-20 lg:py-24">
           <div className="section-shell">
             <div className="mb-12 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
               <div className="max-w-2xl">
@@ -236,6 +236,8 @@ export default function HomePage() {
                       src={listing.image}
                       alt={listing.title}
                       className="absolute inset-0 h-full w-full object-cover"
+                      loading="lazy"
+                      decoding="async"
                     />
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(217,177,95,0.16),transparent_32%),linear-gradient(180deg,rgba(0,0,0,0.06),rgba(0,0,0,0.55))]" />
                     <div className="relative flex h-full items-end justify-between gap-5">
@@ -265,7 +267,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section id="founder" className="border-y border-white/6 bg-[linear-gradient(180deg,#111111,#090909)] py-20 lg:py-24">
+        <section id="founder" className="scroll-mt-28 border-y border-white/6 bg-[linear-gradient(180deg,#111111,#090909)] py-20 lg:py-24">
           <div className="section-shell grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <div className="surface-panel overflow-hidden p-4">
               <div className="overflow-hidden rounded-[1.7rem]">

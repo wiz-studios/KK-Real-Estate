@@ -109,7 +109,7 @@ export default function SubmitListingLandingPage() {
                   <BadgeCheck className="h-4 w-4" />
                   Verified Buyers Only
                 </div>
-                <h1 className="font-display text-6xl leading-[0.9] text-white sm:text-7xl lg:text-[5.4rem]">
+                <h1 className="font-display text-[3.85rem] leading-[0.92] text-white sm:text-7xl lg:text-[5.4rem]">
                   Sell Your House Faster{' '}
                   <span className="gold-gradient-text">Without the Stress</span>
                 </h1>
@@ -168,9 +168,7 @@ export default function SubmitListingLandingPage() {
                   <div className="grid gap-4 sm:grid-cols-[1fr_0.92fr]">
                     <div className="soft-card p-5">
                       <p className="text-xs uppercase tracking-[0.28em] text-white/45">Recent owner result</p>
-                      <p className="mt-4 font-display text-3xl text-white">
-                        “Got a serious buyer in days.”
-                      </p>
+                      <p className="mt-4 font-display text-3xl text-white">"Got a serious buyer in days."</p>
                       <p className="mt-3 text-sm leading-7 text-white/62">
                         Seller response improves when the property is marketed clearly and buyer traffic is filtered better.
                       </p>
@@ -200,7 +198,7 @@ export default function SubmitListingLandingPage() {
             <div className="mb-12 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
               <div className="max-w-2xl">
                 <div className="eyebrow">Seller pain points</div>
-                <h2 className="mt-5 font-display text-5xl text-white sm:text-6xl">
+                <h2 className="mt-5 font-display text-4xl text-white sm:text-5xl lg:text-6xl">
                   Struggling to sell your house?
                 </h2>
               </div>
@@ -226,7 +224,7 @@ export default function SubmitListingLandingPage() {
             <div className="mb-12 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
               <div className="max-w-2xl">
                 <div className="eyebrow">Solution</div>
-                <h2 className="mt-5 font-display text-5xl text-white sm:text-6xl">
+                <h2 className="mt-5 font-display text-4xl text-white sm:text-5xl lg:text-6xl">
                   Here’s how we help you sell faster.
                 </h2>
               </div>
@@ -253,7 +251,7 @@ export default function SubmitListingLandingPage() {
           <div className="section-shell">
             <div className="max-w-2xl">
               <div className="eyebrow">How it works</div>
-              <h2 className="mt-5 font-display text-5xl text-white sm:text-6xl">
+              <h2 className="mt-5 font-display text-4xl text-white sm:text-5xl lg:text-6xl">
                 A simple three-step listing process.
               </h2>
             </div>
@@ -282,7 +280,7 @@ export default function SubmitListingLandingPage() {
             <div className="mb-12 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
               <div className="max-w-2xl">
                 <div className="eyebrow">Trust and authority</div>
-                <h2 className="mt-5 font-display text-5xl text-white sm:text-6xl">
+                <h2 className="mt-5 font-display text-4xl text-white sm:text-5xl lg:text-6xl">
                   A premium process that still stays practical.
                 </h2>
               </div>
@@ -336,7 +334,7 @@ export default function SubmitListingLandingPage() {
               <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
                 <div>
                   <div className="eyebrow">Scarcity</div>
-                  <h2 className="mt-5 font-display text-5xl text-white sm:text-6xl">
+                  <h2 className="mt-5 font-display text-4xl text-white sm:text-5xl lg:text-6xl">
                     Limited listing slots per area.
                   </h2>
                   <p className="mt-4 max-w-2xl text-base leading-8 text-white/68">
@@ -395,10 +393,10 @@ export default function SubmitListingLandingPage() {
           </div>
         </section>
 
-        <section id="owner-form" className="section-shell py-4">
+        <section id="owner-form" className="section-shell scroll-mt-28 py-4">
           <div className="mb-10 max-w-3xl">
             <div className="eyebrow">Lead capture</div>
-            <h2 className="mt-5 font-display text-5xl text-white sm:text-6xl">
+            <h2 className="mt-5 font-display text-4xl text-white sm:text-5xl lg:text-6xl">
               Submit your house details.
             </h2>
             <p className="mt-4 text-base leading-8 text-white/68">
@@ -414,7 +412,9 @@ export default function SubmitListingLandingPage() {
         href={WHATSAPP_URL}
         target="_blank"
         rel="noreferrer"
-        className="fixed bottom-5 right-5 z-50 inline-flex items-center gap-3 rounded-full border border-[#25D366]/20 bg-[#25D366] px-5 py-3 text-sm font-semibold text-[#08150c] shadow-[0_18px_45px_rgba(0,0,0,0.35)] transition-transform duration-300 hover:-translate-y-0.5"
+        className={`fixed right-5 z-50 inline-flex items-center gap-3 rounded-full border border-[#25D366]/20 bg-[#25D366] px-5 py-3 text-sm font-semibold text-[#08150c] shadow-[0_18px_45px_rgba(0,0,0,0.35)] transition-[transform,bottom] duration-300 hover:-translate-y-0.5 ${
+          showStickyCta ? 'bottom-24 md:bottom-5' : 'bottom-5'
+        }`}
       >
         <MessageCircleMore className="h-4 w-4" />
         WhatsApp
@@ -451,3 +451,5 @@ export default function SubmitListingLandingPage() {
     </>
   )
 }
+
+

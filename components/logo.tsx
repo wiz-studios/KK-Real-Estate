@@ -62,11 +62,11 @@ export function Logo({
       </div>
 
       {showText && (
-        <div className="leading-none">
-          <p className={`font-display font-semibold tracking-[0.16em] uppercase ${copyTone.title} ${titleClasses[size]}`}>
+        <div className="min-w-0 leading-none">
+          <p className={`truncate font-display font-semibold tracking-[0.16em] uppercase ${copyTone.title} ${titleClasses[size]}`}>
             KK Real Estate
           </p>
-          <p className={`mt-1 text-[0.68rem] font-semibold uppercase tracking-[0.34em] ${copyTone.subtitle}`}>
+          <p className={`mt-1 hidden text-[0.68rem] font-semibold uppercase tracking-[0.34em] lg:block ${copyTone.subtitle}`}>
             Verified Prestige
           </p>
         </div>

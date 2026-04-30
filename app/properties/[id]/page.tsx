@@ -319,6 +319,7 @@ export default function PropertyDetailPage() {
                       setInquiryForm((prev) => ({ ...prev, name: event.target.value }))
                     }
                     placeholder="Your name"
+                    autoComplete="name"
                     required
                     className="w-full rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-white/35 focus:border-[#d9b15f]/40 focus:outline-none"
                   />
@@ -329,6 +330,7 @@ export default function PropertyDetailPage() {
                       setInquiryForm((prev) => ({ ...prev, email: event.target.value }))
                     }
                     placeholder="Your email"
+                    autoComplete="email"
                     required
                     className="w-full rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-white/35 focus:border-[#d9b15f]/40 focus:outline-none"
                   />
@@ -339,6 +341,8 @@ export default function PropertyDetailPage() {
                       setInquiryForm((prev) => ({ ...prev, phone: event.target.value }))
                     }
                     placeholder="Your phone"
+                    autoComplete="tel"
+                    inputMode="tel"
                     required
                     className="w-full rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-white/35 focus:border-[#d9b15f]/40 focus:outline-none"
                   />

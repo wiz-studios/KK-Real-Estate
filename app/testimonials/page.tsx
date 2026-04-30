@@ -16,7 +16,7 @@ export default function TestimonialsPage() {
                 <ShieldCheck className="h-3.5 w-3.5" />
                 Seller testimonials
               </div>
-              <h1 className="mt-6 font-display text-5xl text-white sm:text-6xl lg:text-7xl">
+              <h1 className="mt-6 font-display text-4xl text-white sm:text-6xl lg:text-7xl">
                 Owners who wanted faster, cleaner property sales.
               </h1>
               <p className="mt-5 max-w-2xl text-base leading-8 text-white/68 sm:text-lg">
@@ -34,8 +34,8 @@ export default function TestimonialsPage() {
                 <div className="mb-5 inline-flex rounded-2xl border border-[#d9b15f]/20 bg-[#d9b15f]/10 p-3 text-[#e7c77d]">
                   <Quote className="h-5 w-5" />
                 </div>
-                <p className="font-display text-4xl leading-tight text-white">
-                  “{testimonial.quote}”
+                <p className="font-display text-3xl leading-tight text-white sm:text-4xl">
+                  "{testimonial.quote}"
                 </p>
                 <div className="mt-6 rounded-[1.5rem] border border-white/8 bg-white/[0.03] p-5">
                   <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#f0d899]">
@@ -61,7 +61,7 @@ export default function TestimonialsPage() {
               </h2>
             </div>
             <Link
-              href="/#owner-form"
+              href="/submit-listing#owner-form"
               className="inline-flex items-center justify-center gap-2 rounded-full bg-[#d9b15f] px-7 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-[#111111]"
             >
               List Your Property

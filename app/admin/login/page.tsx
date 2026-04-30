@@ -85,7 +85,7 @@ export default function AdminLoginPage() {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
+                  placeholder="Enter your password"
                   className="w-full rounded-lg border border-gray-300 py-3 pl-10 pr-4 text-black placeholder:text-gray-400 focus:border-transparent focus:ring-2 focus:ring-yellow-500"
                   disabled={isSubmitting}
                 />
