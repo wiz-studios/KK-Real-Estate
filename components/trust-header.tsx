@@ -28,6 +28,9 @@ export function TrustHeader() {
   const desktopCta = isSellerContext
     ? { href: '/submit-listing#owner-form', label: 'Submit Property' }
     : { href: '/properties', label: 'Browse Properties' }
+  const desktopSecondaryCta = isSellerContext
+    ? { href: '/properties', label: 'Browse Properties' }
+    : { href: '/submit-listing#owner-form', label: 'Submit Listing' }
   const mobileBarCta = isSellerContext
     ? { href: '/properties', label: 'Browse Properties' }
     : { href: '/submit-listing#owner-form', label: 'List Your Property' }
@@ -71,6 +74,13 @@ export function TrustHeader() {
                 </Link>
               ))}
             </nav>
+
+            <Link
+              href={desktopSecondaryCta.href}
+              className="hidden items-center justify-center rounded-full border border-[#d9b15f]/24 bg-[#d9b15f]/10 px-4 py-2.5 text-sm font-semibold text-[#f0d899] transition-colors hover:border-[#d9b15f]/40 hover:text-white lg:inline-flex"
+            >
+              {desktopSecondaryCta.label}
+            </Link>
 
             <Link
               href={desktopCta.href}
