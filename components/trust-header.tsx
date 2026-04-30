@@ -30,10 +30,10 @@ export function TrustHeader() {
     : { href: '/properties', label: 'Browse Properties' }
   const desktopSecondaryCta = isSellerContext
     ? { href: '/properties', label: 'Browse Properties' }
-    : { href: '/submit-listing#owner-form', label: 'Submit Listing' }
+    : { href: '/submit-listing', label: 'Submit Listing' }
   const mobileBarCta = isSellerContext
     ? { href: '/properties', label: 'Browse Properties' }
-    : { href: '/submit-listing#owner-form', label: 'List Your Property' }
+    : { href: '/submit-listing', label: 'Submit Listing' }
 
   useEffect(() => {
     setIsMenuOpen(false)
@@ -144,10 +144,10 @@ export function TrustHeader() {
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
-                  href="/submit-listing#owner-form"
+                  href="/submit-listing"
                   className="inline-flex items-center justify-center rounded-full border border-white/12 px-4 py-3 text-sm font-semibold text-white/82 transition-colors hover:border-[#d9b15f]/35 hover:text-[#f2dca3]"
                 >
-                  {isSellerContext ? 'Submit Property' : 'List Your Property'}
+                  {isSellerContext ? 'Submit Property' : 'Submit Listing'}
                 </Link>
               </div>
             </div>

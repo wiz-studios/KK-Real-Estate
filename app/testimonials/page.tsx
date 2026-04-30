@@ -61,7 +61,7 @@ export default function TestimonialsPage() {
               </h2>
             </div>
             <Link
-              href="/submit-listing#owner-form"
+              href="/submit-listing"
               className="inline-flex items-center justify-center gap-2 rounded-full bg-[#d9b15f] px-7 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-[#111111]"
             >
               Submit Your Property
