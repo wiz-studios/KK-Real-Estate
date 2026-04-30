@@ -64,7 +64,7 @@ export default function TestimonialsPage() {
               href="/submit-listing#owner-form"
               className="inline-flex items-center justify-center gap-2 rounded-full bg-[#d9b15f] px-7 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-[#111111]"
             >
-              List Your Property
+              Submit Your Property
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>

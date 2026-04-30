@@ -95,14 +95,14 @@ export default function HomePage() {
                   href="/properties"
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-[#d9b15f] px-7 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-[#111111] transition-transform duration-300 hover:-translate-y-0.5"
                 >
-                  Explore Listings
+                  Browse Verified Properties
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
-                  href="#founder"
+                  href="#experience"
                   className="inline-flex items-center justify-center rounded-full border border-white/14 px-7 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-white/82 transition-colors hover:border-[#d9b15f]/35 hover:text-[#f2dca3]"
                 >
-                  Meet the Founder
+                  Why KK Real Estate
                 </Link>
               </div>
 
@@ -185,7 +185,7 @@ export default function HomePage() {
           <div className="section-shell">
             <div className="mb-12 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
               <div className="max-w-2xl">
-                <div className="eyebrow">Client experience</div>
+                <div className="eyebrow">Why KK</div>
                 <h2 className="mt-5 font-display text-5xl text-white sm:text-6xl">
                   A sharper property journey, without the marketplace noise.
                 </h2>
@@ -309,7 +309,7 @@ export default function HomePage() {
           <div className="section-shell">
             <div className="surface-panel flex flex-col gap-8 px-6 py-8 md:flex-row md:items-center md:justify-between md:px-8">
               <div>
-                <p className="text-xs uppercase tracking-[0.28em] text-white/45">Ready to browse</p>
+                <p className="text-xs uppercase tracking-[0.28em] text-white/45">Buyer CTA</p>
                 <h2 className="mt-2 font-display text-4xl text-white sm:text-5xl">
                   Start with listings that already feel filtered.
                 </h2>
@@ -318,7 +318,7 @@ export default function HomePage() {
                 href="/properties"
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-[#d9b15f] px-7 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-[#111111]"
               >
-                Open property catalogue
+                Browse Verified Properties
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

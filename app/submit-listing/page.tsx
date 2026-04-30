@@ -123,14 +123,14 @@ export default function SubmitListingLandingPage() {
                   href="#owner-form"
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-[#d9b15f] px-7 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-[#111111] transition-transform duration-300 hover:-translate-y-0.5"
                 >
-                  List Your Property
+                  Submit Your Property
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
-                  href="#owner-form"
+                  href="/testimonials"
                   className="inline-flex items-center justify-center rounded-full border border-white/14 px-7 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-white/82 transition-colors hover:border-[#d9b15f]/35 hover:text-[#f2dca3]"
                 >
-                  Get a Free Property Review
+                  See Seller Results
                 </Link>
               </div>
 
@@ -225,7 +225,7 @@ export default function SubmitListingLandingPage() {
               <div className="max-w-2xl">
                 <div className="eyebrow">Solution</div>
                 <h2 className="mt-5 font-display text-4xl text-white sm:text-5xl lg:text-6xl">
-                  Here’s how we help you sell faster.
+                  Here's how we help you sell faster.
                 </h2>
               </div>
               <p className="max-w-xl text-base leading-8 text-white/68">
@@ -303,9 +303,7 @@ export default function SubmitListingLandingPage() {
                 {testimonials.slice(0, 2).map((testimonial) => (
                   <article key={testimonial.name} className="surface-panel p-6">
                     <p className="text-xs uppercase tracking-[0.26em] text-[#f0d899]">{testimonial.result}</p>
-                    <p className="mt-4 font-display text-4xl text-white">
-                      “{testimonial.quote}”
-                    </p>
+                    <p className="mt-4 font-display text-4xl text-white">"{testimonial.quote}"</p>
                     <div className="mt-5 text-sm text-white/58">
                       <p className="font-semibold text-white">{testimonial.name}</p>
                       <p>{testimonial.role}</p>
@@ -321,7 +319,7 @@ export default function SubmitListingLandingPage() {
                 href="/testimonials"
                 className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-[#f0d899] transition-colors hover:text-white"
               >
-                Read all testimonials
+                See all seller results
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
@@ -435,7 +433,7 @@ export default function SubmitListingLandingPage() {
               href="#owner-form"
               className="inline-flex items-center justify-center rounded-full bg-[#d9b15f] px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-[#111111]"
             >
-              List Your Property
+              Submit Property
             </Link>
             <a
               href={WHATSAPP_URL}
@@ -451,5 +449,6 @@ export default function SubmitListingLandingPage() {
     </>
   )
 }
+
 
 

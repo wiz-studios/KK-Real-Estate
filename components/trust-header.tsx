@@ -6,17 +6,31 @@ import { useEffect, useState } from 'react'
 import { ArrowRight, Menu, ShieldCheck, X } from 'lucide-react'
 import { Logo } from './logo'
 
-const navLinks = [
+const buyerNavLinks = [
   { href: '/properties', label: 'Properties' },
-  { href: '/submit-listing', label: 'Submit Listing' },
   { href: '/testimonials', label: 'Testimonials' },
-  { href: '/#experience', label: 'Experience' },
+  { href: '/#experience', label: 'Why KK' },
   { href: '/#founder', label: 'Founder' },
+]
+
+const sellerNavLinks = [
+  { href: '/submit-listing#how-it-works', label: 'How It Works' },
+  { href: '/testimonials', label: 'Seller Results' },
+  { href: '/submit-listing#owner-form', label: 'Submit Property' },
 ]
 
 export function TrustHeader() {
   const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const isSellerContext = pathname === '/submit-listing' || pathname === '/testimonials'
+  const navLinks = isSellerContext ? sellerNavLinks : buyerNavLinks
+  const badgeLabel = isSellerContext ? 'Seller listing desk' : 'Verified private listings'
+  const desktopCta = isSellerContext
+    ? { href: '/submit-listing#owner-form', label: 'Submit Property' }
+    : { href: '/properties', label: 'Browse Properties' }
+  const mobileBarCta = isSellerContext
+    ? { href: '/properties', label: 'Browse Properties' }
+    : { href: '/submit-listing#owner-form', label: 'List Your Property' }
 
   useEffect(() => {
     setIsMenuOpen(false)
@@ -41,7 +55,7 @@ export function TrustHeader() {
           <div className="hidden items-center gap-3 lg:flex">
             <div className="inline-flex items-center gap-2 rounded-full border border-[#d9b15f]/24 bg-[#d9b15f]/10 px-4 py-2 text-sm font-medium text-[#f0d899]">
               <ShieldCheck className="h-4 w-4" />
-              Verified private listings
+              {badgeLabel}
             </div>
           </div>
 
@@ -59,10 +73,10 @@ export function TrustHeader() {
             </nav>
 
             <Link
-              href="/properties"
+              href={desktopCta.href}
               className="hidden items-center gap-2 rounded-full bg-[#d9b15f] px-4 py-2.5 text-sm font-semibold text-[#111111] transition-transform duration-300 hover:-translate-y-0.5 md:inline-flex"
             >
-              Explore
+              {desktopCta.label}
               <ArrowRight className="h-4 w-4" />
             </Link>
 
@@ -81,10 +95,10 @@ export function TrustHeader() {
 
         <div className="pb-3 md:hidden">
           <Link
-            href="/submit-listing#owner-form"
+            href={mobileBarCta.href}
             className="inline-flex w-full items-center justify-center rounded-full border border-[#d9b15f]/24 bg-[#d9b15f]/10 px-4 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-[#f0d899] transition-colors hover:border-[#d9b15f]/40 hover:text-white"
           >
-            Submit Listing
+            {mobileBarCta.label}
           </Link>
         </div>
 
@@ -96,7 +110,7 @@ export function TrustHeader() {
             <div className="space-y-4">
               <div className="inline-flex items-center gap-2 rounded-full border border-[#d9b15f]/24 bg-[#d9b15f]/10 px-4 py-2 text-sm font-medium text-[#f0d899]">
                 <ShieldCheck className="h-4 w-4" />
-                Verified private listings
+                {badgeLabel}
               </div>
 
               <nav className="grid gap-2">
@@ -116,14 +130,14 @@ export function TrustHeader() {
                   href="/properties"
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-[#d9b15f] px-4 py-3 text-sm font-semibold text-[#111111]"
                 >
-                  Explore Listings
+                  Browse Properties
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
                   href="/submit-listing#owner-form"
                   className="inline-flex items-center justify-center rounded-full border border-white/12 px-4 py-3 text-sm font-semibold text-white/82 transition-colors hover:border-[#d9b15f]/35 hover:text-[#f2dca3]"
                 >
-                  Submit Listing
+                  {isSellerContext ? 'Submit Property' : 'List Your Property'}
                 </Link>
               </div>
             </div>
