@@ -1,0 +1,34 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1000" fill="#131313"/>
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <path d="M0 682C156 610 274 574 472 574C654 574 782 624 942 624C1121 624 1261 558 1600 464V1000H0V682Z" fill="#253323"/>
+  <path d="M0 734C223 646 332 624 506 624C683 624 789 666 936 666C1116 666 1321 578 1600 530V1000H0V734Z" fill="#1A2318"/>
+  <rect x="410" y="362" width="736" height="308" rx="14" fill="#2A241D"/>
+  <rect x="478" y="300" width="598" height="94" rx="16" fill="#3A3126"/>
+  <path d="M442 384L778 190L1114 384H442Z" fill="#191919"/>
+  <path d="M778 160L1148 384H1093L778 192L463 384H408L778 160Z" fill="#D9B15F"/>
+  <rect x="474" y="410" width="202" height="148" rx="8" fill="#D6C9A5"/>
+  <rect x="718" y="410" width="202" height="148" rx="8" fill="#D6C9A5"/>
+  <rect x="962" y="410" width="112" height="148" rx="8" fill="#D6C9A5"/>
+  <rect x="696" y="450" width="160" height="220" rx="8" fill="#4A3422"/>
+  <rect x="736" y="486" width="82" height="184" rx="6" fill="#5C4028"/>
+  <rect x="500" y="430" width="148" height="108" rx="6" fill="#F1E4BF"/>
+  <rect x="744" y="430" width="148" height="108" rx="6" fill="#F1E4BF"/>
+  <rect x="980" y="430" width="78" height="108" rx="6" fill="#F1E4BF"/>
+  <rect x="392" y="670" width="772" height="24" rx="12" fill="#745E3B"/>
+  <circle cx="290" cy="460" r="108" fill="#243123"/>
+  <circle cx="1246" cy="416" r="128" fill="#243123"/>
+  <circle cx="1324" cy="472" r="88" fill="#1B251A"/>
+  <circle cx="356" cy="514" r="84" fill="#1B251A"/>
+  <rect x="244" y="548" width="28" height="138" rx="14" fill="#57442C"/>
+  <rect x="1262" y="522" width="28" height="164" rx="14" fill="#57442C"/>
+  <text x="110" y="144" fill="#F2DBA1" font-family="Georgia, serif" font-size="62" letter-spacing="10">KAREN GARDEN RESIDENCE</text>
+  <text x="112" y="206" fill="#FFFFFF" fill-opacity="0.68" font-family="Arial, sans-serif" font-size="28" letter-spacing="4">Warm, landscaped, private-client family home</text>
+  <defs>
+    <linearGradient id="bg" x1="800" y1="0" x2="800" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2A2218"/>
+      <stop offset="0.5" stop-color="#161616"/>
+      <stop offset="1" stop-color="#090909"/>
+    </linearGradient>
+  </defs>
+</svg>

@@ -1,0 +1,31 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1000" fill="#10151A"/>
+  <rect width="1600" height="1000" fill="url(#coast)"/>
+  <path d="M0 640C210 592 292 574 486 594C716 620 814 690 1030 690C1228 690 1372 646 1600 596V1000H0V640Z" fill="#153540"/>
+  <path d="M0 724C174 690 306 682 468 706C662 734 818 808 1018 808C1252 808 1418 754 1600 718V1000H0V724Z" fill="#0D2530"/>
+  <rect x="360" y="370" width="880" height="252" rx="18" fill="#E9DFC7"/>
+  <rect x="452" y="292" width="694" height="116" rx="18" fill="#F4E9CD"/>
+  <path d="M402 396L800 188L1198 396H402Z" fill="#B58D4C"/>
+  <path d="M800 154L1246 396H1172L800 198L428 396H354L800 154Z" fill="#F1D58C"/>
+  <rect x="426" y="422" width="164" height="118" rx="8" fill="#75C1D5"/>
+  <rect x="620" y="422" width="164" height="118" rx="8" fill="#75C1D5"/>
+  <rect x="814" y="422" width="164" height="118" rx="8" fill="#75C1D5"/>
+  <rect x="1008" y="422" width="164" height="118" rx="8" fill="#75C1D5"/>
+  <rect x="736" y="472" width="128" height="150" rx="10" fill="#9C7240"/>
+  <rect x="346" y="622" width="908" height="26" rx="13" fill="#B58D4C"/>
+  <rect x="300" y="648" width="1000" height="72" rx="16" fill="#E6D8B4"/>
+  <circle cx="268" cy="326" r="80" fill="#1F4E40"/>
+  <circle cx="1336" cy="334" r="94" fill="#1F4E40"/>
+  <circle cx="1298" cy="402" r="62" fill="#17392F"/>
+  <rect x="242" y="396" width="26" height="126" rx="13" fill="#725736"/>
+  <rect x="1332" y="418" width="26" height="126" rx="13" fill="#725736"/>
+  <text x="104" y="136" fill="#F4DFAB" font-family="Georgia, serif" font-size="62" letter-spacing="10">NYALI SIGNATURE VILLA</text>
+  <text x="106" y="198" fill="#FFFFFF" fill-opacity="0.68" font-family="Arial, sans-serif" font-size="28" letter-spacing="4">Coastal prestige with private terraces and sunset frontage</text>
+  <defs>
+    <linearGradient id="coast" x1="800" y1="0" x2="800" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2A6170"/>
+      <stop offset="0.46" stop-color="#173843"/>
+      <stop offset="1" stop-color="#0A1217"/>
+    </linearGradient>
+  </defs>
+</svg>
