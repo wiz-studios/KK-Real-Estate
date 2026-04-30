@@ -1,392 +1,453 @@
 'use client'
 
-import { FormEvent, useState } from 'react'
 import Link from 'next/link'
-import { ArrowRight, CircleCheckBig, Home, ShieldCheck } from 'lucide-react'
-import { TrustHeader } from '@/components/trust-header'
-import { PropertyType } from '@/lib/types'
-import { ImageUploadField } from '@/components/ui/image-upload-field'
-import { KenyaCountyCombobox } from '@/components/ui/kenya-county-combobox'
+import { useEffect, useState } from 'react'
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
+  ArrowRight,
+  BadgeCheck,
+  Camera,
+  Clock3,
+  MapPinned,
+  MessageCircleMore,
+  PhoneCall,
+  ShieldCheck,
+  Sparkles,
+  Upload,
+  UserCheck,
+} from 'lucide-react'
+import { TrustHeader } from '@/components/trust-header'
+import { OwnerLeadForm } from '@/components/owner-lead-form'
+import { testimonials } from '@/lib/testimonials'
 
-const propertyTypes: PropertyType[] = [
-  'bungalow',
-  'flatroof',
-  'townhouse',
-  'apartment',
-  'penthouse',
-  'villa',
-  'mansion',
-  'cottage',
-  'duplex',
-  'studio',
+const WHATSAPP_URL =
+  'https://wa.me/254700000000?text=Hello%20KK%20Real%20Estate%2C%20I%20want%20help%20selling%20my%20house.'
+
+const painPoints = [
+  'Too many unserious buyers wasting your time',
+  'Your property not getting enough visibility',
+  'No professional marketing or exposure',
+  'Long delays with no clear progress',
 ]
 
-export default function SubmitListingPage() {
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [successId, setSuccessId] = useState<string | null>(null)
-  const [imageFiles, setImageFiles] = useState<File[]>([])
-  const [formData, setFormData] = useState({
-    submitterName: '',
-    submitterEmail: '',
-    submitterPhone: '',
-    title: '',
-    propertyType: 'villa' as PropertyType,
-    address: '',
-    city: '',
-    county: '',
-    price: '',
-    totalRooms: '6',
-    bedrooms: '4',
-    bathrooms: '4',
-    livingRooms: '1',
-    kitchens: '1',
-    plotSize: '',
-    builtArea: '',
-    constructionYear: '2020',
-    latitude: '',
-    longitude: '',
-    description: '',
-    submitterNotes: '',
-  })
+const solutionPoints = [
+  {
+    icon: Camera,
+    title: 'Professional property listings',
+    copy: 'We position your already-built house with better images, better presentation, and a stronger first impression.',
+  },
+  {
+    icon: UserCheck,
+    title: 'Exposure to real, active buyers',
+    copy: 'Your listing reaches a screened buyer network instead of getting buried among low-intent inquiries.',
+  },
+  {
+    icon: PhoneCall,
+    title: 'Fast response and viewing coordination',
+    copy: 'We coordinate follow-up, answer buyer questions, and keep viewings moving without extra friction.',
+  },
+  {
+    icon: MapPinned,
+    title: 'Local market expertise',
+    copy: 'Pricing context, buyer expectations, and area-specific positioning are handled with local market awareness.',
+  },
+]
 
-  const inputClassName =
-    'w-full rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-white/35 focus:border-[#d9b15f]/40 focus:outline-none'
+const processSteps = [
+  {
+    icon: Upload,
+    title: 'Submit your property details',
+    copy: 'Share your location, price, room count, and photos through a short listing form.',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'We review and publish your listing',
+    copy: 'Our team checks the details, positions the property properly, and prepares it for serious buyer attention.',
+  },
+  {
+    icon: BadgeCheck,
+    title: 'We bring verified buyers and book viewings',
+    copy: 'Qualified buyer interest is handled with faster feedback and structured viewing coordination.',
+  },
+]
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = event.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+const trustSignals = [
+  'Verified Listings Only',
+  'Serious Buyer Network',
+  'Fast Turnaround',
+]
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    setError(null)
-    setSuccessId(null)
-    setIsSubmitting(true)
+export default function SubmitListingLandingPage() {
+  const [showStickyCta, setShowStickyCta] = useState(false)
 
-    try {
-      if (imageFiles.length === 0) {
-        throw new Error('Please upload at least one property image.')
-      }
-
-      const payload = new FormData()
-      Object.entries(formData).forEach(([key, value]) => {
-        payload.append(key, value)
-      })
-      imageFiles.forEach((file) => payload.append('images', file))
-
-      const response = await fetch('/api/properties/submit', {
-        method: 'POST',
-        body: payload,
-      })
-
-      const result = await response.json()
-
-      if (!response.ok) {
-        throw new Error(result.error || 'Failed to submit listing')
-      }
-
-      setSuccessId(result.data.id)
-      setFormData({
-        submitterName: '',
-        submitterEmail: '',
-        submitterPhone: '',
-        title: '',
-        propertyType: 'villa',
-        address: '',
-        city: '',
-        county: '',
-        price: '',
-        totalRooms: '6',
-        bedrooms: '4',
-        bathrooms: '4',
-        livingRooms: '1',
-        kitchens: '1',
-        plotSize: '',
-        builtArea: '',
-        constructionYear: '2020',
-        latitude: '',
-        longitude: '',
-        description: '',
-        submitterNotes: '',
-      })
-      setImageFiles([])
-    } catch (submissionError) {
-      setError(submissionError instanceof Error ? submissionError.message : 'Submission failed')
-    } finally {
-      setIsSubmitting(false)
+  useEffect(() => {
+    const onScroll = () => {
+      setShowStickyCta(window.scrollY > 420)
     }
-  }
+
+    onScroll()
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   return (
     <>
       <TrustHeader />
 
-      <main className="pb-20">
-        <section className="section-shell grid gap-10 py-12 lg:grid-cols-[0.75fr_1.25fr] lg:py-16">
-          <div className="space-y-6">
-            <div className="eyebrow">
-              <Home className="h-3.5 w-3.5" />
-              Public listing submission
-            </div>
-            <h1 className="font-display text-5xl text-white sm:text-6xl">
-              Submit a property for admin review.
-            </h1>
-            <p className="text-base leading-8 text-white/68">
-              Send the listing details, contact information, and property photos. The admin team will
-              review the submission before anything goes live.
-            </p>
+      <main className="overflow-hidden pb-28">
+        <section className="hero-grid relative border-b border-[#d9b15f]/10">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(217,177,95,0.16),transparent_28%),radial-gradient(circle_at_left,rgba(255,255,255,0.05),transparent_20%)]" />
 
-            <div className="surface-panel p-6">
-              <h2 className="font-display text-3xl text-white">What happens next</h2>
-              <div className="mt-5 space-y-4 text-sm leading-7 text-white/65">
-                <p>1. Your listing is stored as pending and stays hidden from the public catalogue.</p>
-                <p>2. Admin reviews the details, contact information, and image set.</p>
-                <p>3. Only approved and verified listings become publicly visible.</p>
+          <div className="section-shell relative grid min-h-[calc(100vh-5rem)] items-center gap-12 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:py-22">
+            <div className="fade-up max-w-3xl space-y-8">
+              <div className="eyebrow">
+                <Sparkles className="h-3.5 w-3.5" />
+                Seller-focused listing desk
+              </div>
+
+              <div className="space-y-6">
+                <div className="inline-flex items-center gap-2 rounded-full border border-[#d9b15f]/24 bg-[#d9b15f]/10 px-4 py-2 text-sm font-medium text-[#f0d899]">
+                  <BadgeCheck className="h-4 w-4" />
+                  Verified Buyers Only
+                </div>
+                <h1 className="font-display text-6xl leading-[0.9] text-white sm:text-7xl lg:text-[5.4rem]">
+                  Sell Your House Faster{' '}
+                  <span className="gold-gradient-text">Without the Stress</span>
+                </h1>
+                <p className="max-w-2xl text-lg leading-8 text-white/70 sm:text-xl">
+                  We connect you with serious buyers, handle the marketing, and help you close faster.
+                </p>
+              </div>
+
+              <div className="flex flex-col gap-4 sm:flex-row">
+                <Link
+                  href="#owner-form"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#d9b15f] px-7 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-[#111111] transition-transform duration-300 hover:-translate-y-0.5"
+                >
+                  List Your Property
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link
+                  href="#owner-form"
+                  className="inline-flex items-center justify-center rounded-full border border-white/14 px-7 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-white/82 transition-colors hover:border-[#d9b15f]/35 hover:text-[#f2dca3]"
+                >
+                  Get a Free Property Review
+                </Link>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-3">
+                <div className="soft-card p-5">
+                  <p className="font-display text-4xl text-[#f4e4b7]">Serious</p>
+                  <p className="mt-2 text-sm uppercase tracking-[0.22em] text-white/50">Buyer screening first</p>
+                </div>
+                <div className="soft-card p-5">
+                  <p className="font-display text-4xl text-[#f4e4b7]">Fast</p>
+                  <p className="mt-2 text-sm uppercase tracking-[0.22em] text-white/50">Viewing coordination</p>
+                </div>
+                <div className="soft-card p-5">
+                  <p className="font-display text-4xl text-[#f4e4b7]">Local</p>
+                  <p className="mt-2 text-sm uppercase tracking-[0.22em] text-white/50">Market positioning</p>
+                </div>
               </div>
             </div>
 
-            <div className="soft-card p-5">
-              <div className="flex items-start gap-3">
-                <ShieldCheck className="mt-1 h-5 w-5 text-[#d9b15f]" />
-                <div>
-                  <p className="font-semibold text-white">Minimum submission package</p>
-                  <p className="mt-2 text-sm leading-7 text-white/58">
-                    Use clear JPG or PNG property images, accurate address details, realistic pricing, and a
-                    reachable owner or agent phone number. Incomplete submissions slow the approval queue.
-                  </p>
+            <div className="fade-up lg:justify-self-end">
+              <div className="surface-panel relative overflow-hidden p-5 sm:p-6">
+                <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-[#d9b15f]/70 to-transparent" />
+                <div className="grid gap-5">
+                  <div className="rounded-[1.75rem] border border-white/10 bg-black/30 p-5">
+                    <p className="text-xs uppercase tracking-[0.28em] text-white/45">Why sellers move to KK</p>
+                    <div className="mt-5 grid gap-4">
+                      {painPoints.slice(0, 3).map((point) => (
+                        <div key={point} className="soft-card p-4">
+                          <p className="text-sm leading-7 text-white/72">{point}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="grid gap-4 sm:grid-cols-[1fr_0.92fr]">
+                    <div className="soft-card p-5">
+                      <p className="text-xs uppercase tracking-[0.28em] text-white/45">Recent owner result</p>
+                      <p className="mt-4 font-display text-3xl text-white">
+                        “Got a serious buyer in days.”
+                      </p>
+                      <p className="mt-3 text-sm leading-7 text-white/62">
+                        Seller response improves when the property is marketed clearly and buyer traffic is filtered better.
+                      </p>
+                    </div>
+
+                    <div className="soft-card flex flex-col justify-between p-5">
+                      <div className="inline-flex w-max items-center gap-2 rounded-full border border-[#d9b15f]/20 bg-[#d9b15f]/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[#f1d89b]">
+                        <Clock3 className="h-3.5 w-3.5" />
+                        Limited listing slots per area
+                      </div>
+                      <div className="space-y-2">
+                        <p className="font-display text-3xl text-white">Quality over volume.</p>
+                        <p className="text-sm leading-7 text-white/65">
+                          We focus on quality listings to ensure faster sales and stronger buyer attention.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+        </section>
 
-          <div className="surface-panel p-6 sm:p-8">
-            {successId && (
-              <div className="mb-6 rounded-[1.5rem] border border-green-400/20 bg-green-400/10 px-5 py-4 text-sm text-green-100">
-                Listing submitted successfully. Reference ID: {successId}
+        <section className="border-b border-white/6 py-20 lg:py-24">
+          <div className="section-shell">
+            <div className="mb-12 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+              <div className="max-w-2xl">
+                <div className="eyebrow">Seller pain points</div>
+                <h2 className="mt-5 font-display text-5xl text-white sm:text-6xl">
+                  Struggling to sell your house?
+                </h2>
               </div>
-            )}
+              <p className="max-w-xl text-base leading-8 text-white/68">
+                Most delays are not caused by the house alone. They come from weak presentation, poor exposure,
+                and too much time lost on the wrong buyers.
+              </p>
+            </div>
 
-            {error && (
-              <div className="mb-6 rounded-[1.5rem] border border-red-400/20 bg-red-400/10 px-5 py-4 text-sm text-red-100">
-                {error}
+            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+              {painPoints.map((painPoint, index) => (
+                <article key={painPoint} className="surface-panel p-6">
+                  <p className="text-xs uppercase tracking-[0.28em] text-white/45">Pain point {index + 1}</p>
+                  <p className="mt-4 font-display text-3xl text-white">{painPoint}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-20 lg:py-24">
+          <div className="section-shell">
+            <div className="mb-12 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+              <div className="max-w-2xl">
+                <div className="eyebrow">Solution</div>
+                <h2 className="mt-5 font-display text-5xl text-white sm:text-6xl">
+                  Here’s how we help you sell faster.
+                </h2>
               </div>
-            )}
+              <p className="max-w-xl text-base leading-8 text-white/68">
+                The model is simple: position the property properly, attract active buyer demand, and keep the process moving.
+              </p>
+            </div>
 
-            <form onSubmit={handleSubmit} className="space-y-8">
-              <div className="grid gap-4 md:grid-cols-3">
-                <div>
-                  <label className="mb-2 block text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-white/50">
-                    Contact Name
-                  </label>
-                  <input name="submitterName" value={formData.submitterName} onChange={handleChange} className={inputClassName} required />
-                </div>
-                <div>
-                  <label className="mb-2 block text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-white/50">
-                    Contact Email
-                  </label>
-                  <input type="email" name="submitterEmail" value={formData.submitterEmail} onChange={handleChange} className={inputClassName} required />
-                </div>
-                <div>
-                  <label className="mb-2 block text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-white/50">
-                    Contact Phone
-                  </label>
-                  <input name="submitterPhone" value={formData.submitterPhone} onChange={handleChange} className={inputClassName} required />
-                </div>
+            <div className="grid gap-6 lg:grid-cols-2">
+              {solutionPoints.map((point) => (
+                <article key={point.title} className="surface-panel p-7">
+                  <div className="mb-6 inline-flex rounded-2xl border border-[#d9b15f]/20 bg-[#d9b15f]/10 p-3 text-[#e7c77d]">
+                    <point.icon className="h-6 w-6" />
+                  </div>
+                  <h3 className="font-display text-4xl text-white">{point.title}</h3>
+                  <p className="mt-4 text-sm leading-7 text-white/68">{point.copy}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="how-it-works" className="border-y border-white/6 bg-[linear-gradient(180deg,#111111,#090909)] py-20 lg:py-24">
+          <div className="section-shell">
+            <div className="max-w-2xl">
+              <div className="eyebrow">How it works</div>
+              <h2 className="mt-5 font-display text-5xl text-white sm:text-6xl">
+                A simple three-step listing process.
+              </h2>
+            </div>
+
+            <div className="mt-12 grid gap-6 lg:grid-cols-3">
+              {processSteps.map((step, index) => (
+                <article key={step.title} className="surface-panel p-7">
+                  <div className="mb-6 flex items-center justify-between">
+                    <div className="inline-flex rounded-2xl border border-[#d9b15f]/20 bg-[#d9b15f]/10 p-3 text-[#e7c77d]">
+                      <step.icon className="h-6 w-6" />
+                    </div>
+                    <span className="text-xs font-semibold uppercase tracking-[0.26em] text-[#f0d899]">
+                      Step {index + 1}
+                    </span>
+                  </div>
+                  <h3 className="font-display text-4xl text-white">{step.title}</h3>
+                  <p className="mt-4 text-sm leading-7 text-white/68">{step.copy}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-20 lg:py-24">
+          <div className="section-shell">
+            <div className="mb-12 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+              <div className="max-w-2xl">
+                <div className="eyebrow">Trust and authority</div>
+                <h2 className="mt-5 font-display text-5xl text-white sm:text-6xl">
+                  A premium process that still stays practical.
+                </h2>
               </div>
+              <p className="max-w-xl text-base leading-8 text-white/68">
+                The goal is not to look flashy. It is to create confidence quickly and make buyer conversations more productive.
+              </p>
+            </div>
 
-              <div className="grid gap-4 md:grid-cols-2">
-                <div>
-                  <label className="mb-2 block text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-white/50">
-                    Property Title
-                  </label>
-                  <input name="title" value={formData.title} onChange={handleChange} className={inputClassName} required />
-                </div>
-                <div>
-                  <label className="mb-2 block text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-white/50">
-                    Property Type
-                  </label>
-                  <Select
-                    value={formData.propertyType}
-                    onValueChange={(value) =>
-                      setFormData((prev) => ({ ...prev, propertyType: value as PropertyType }))
-                    }
-                  >
-                    <SelectTrigger className="h-[50px] w-full rounded-2xl border border-white/10 bg-white/[0.04] px-4 text-sm text-white shadow-none">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent className="rounded-2xl border border-[#d9b15f]/20 bg-[#111111] text-white shadow-[0_24px_50px_rgba(0,0,0,0.55)]">
-                      {propertyTypes.map((type) => (
-                        <SelectItem
-                          key={type}
-                          value={type}
-                          className="rounded-xl px-3 py-3 text-white focus:bg-[#d9b15f]/14 focus:text-[#f2dca3]"
-                        >
-                          {type.charAt(0).toUpperCase() + type.slice(1)}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-
-              <div className="grid gap-4 md:grid-cols-3">
-                <div className="md:col-span-2">
-                  <label className="mb-2 block text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-white/50">
-                    Address
-                  </label>
-                  <input name="address" value={formData.address} onChange={handleChange} className={inputClassName} required />
-                </div>
-                <div>
-                  <label className="mb-2 block text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-white/50">
-                    Price (KES)
-                  </label>
-                  <input type="number" name="price" value={formData.price} onChange={handleChange} className={inputClassName} required />
-                </div>
-              </div>
-
-              <div className="grid gap-4 md:grid-cols-4">
-                <div>
-                  <label className="mb-2 block text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-white/50">
-                    City/Town
-                  </label>
-                  <input name="city" value={formData.city} onChange={handleChange} className={inputClassName} required />
-                </div>
-                <div>
-                  <label className="mb-2 block text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-white/50">
-                    County
-                  </label>
-                  <KenyaCountyCombobox
-                    value={formData.county}
-                    onValueChange={(value) => setFormData((prev) => ({ ...prev, county: value }))}
-                    placeholder="Search Kenya county"
-                    tone="dark"
-                  />
-                </div>
-                <div>
-                  <label className="mb-2 block text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-white/50">
-                    Latitude
-                  </label>
-                  <input name="latitude" value={formData.latitude} onChange={handleChange} className={inputClassName} />
-                </div>
-                <div>
-                  <label className="mb-2 block text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-white/50">
-                    Longitude
-                  </label>
-                  <input name="longitude" value={formData.longitude} onChange={handleChange} className={inputClassName} />
-                </div>
-              </div>
-
-              <div className="grid gap-4 md:grid-cols-4 lg:grid-cols-7">
-                {[
-                  ['totalRooms', 'Total Rooms'],
-                  ['bedrooms', 'Bedrooms'],
-                  ['bathrooms', 'Bathrooms'],
-                  ['livingRooms', 'Living Rooms'],
-                  ['kitchens', 'Kitchens'],
-                  ['constructionYear', 'Year'],
-                ].map(([name, label]) => (
-                  <div key={name}>
-                    <label className="mb-2 block text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-white/50">
-                      {label}
-                    </label>
-                    <input type="number" name={name} value={(formData as any)[name]} onChange={handleChange} className={inputClassName} required />
+            <div className="grid gap-6 xl:grid-cols-[0.8fr_1.2fr]">
+              <div className="grid gap-4 sm:grid-cols-3 xl:grid-cols-1">
+                {trustSignals.map((signal) => (
+                  <div key={signal} className="soft-card p-5">
+                    <p className="text-xs uppercase tracking-[0.26em] text-white/45">Trust signal</p>
+                    <p className="mt-3 font-display text-3xl text-white">{signal}</p>
                   </div>
                 ))}
-
-                <div>
-                  <label className="mb-2 block text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-white/50">
-                    Built Area
-                  </label>
-                  <input name="builtArea" value={formData.builtArea} onChange={handleChange} className={inputClassName} />
-                </div>
               </div>
 
-              <div>
-                <label className="mb-2 block text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-white/50">
-                  Plot Size
-                </label>
-                <input name="plotSize" value={formData.plotSize} onChange={handleChange} className={inputClassName} />
-              </div>
-
-              <div>
-                <label className="mb-2 block text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-white/50">
-                  Property Description
-                </label>
-                <textarea
-                  name="description"
-                  value={formData.description}
-                  onChange={handleChange}
-                  rows={5}
-                  className={inputClassName}
-                  required
-                />
-              </div>
-
-              <ImageUploadField
-                files={imageFiles}
-                onFilesChange={setImageFiles}
-                onError={setError}
-                maxFiles={10}
-                maxFileSizeMb={5}
-                tone="dark"
-              />
-
-              <div>
-                <label className="mb-2 block text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-white/50">
-                  Submission Notes
-                </label>
-                <textarea
-                  name="submitterNotes"
-                  value={formData.submitterNotes}
-                  onChange={handleChange}
-                  rows={4}
-                  placeholder="Access notes, occupancy status, preferred contact times, or anything the admin should review."
-                  className={inputClassName}
-                />
-              </div>
-
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <p className="text-sm text-white/52">
-                  By submitting, you confirm the information is accurate and ready for admin review.
-                </p>
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#d9b15f] px-7 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-[#111111] disabled:opacity-60"
-                >
-                  {isSubmitting ? 'Submitting...' : 'Submit Listing'}
-                  <ArrowRight className="h-4 w-4" />
-                </button>
-              </div>
-            </form>
-
-            <div className="mt-8 rounded-[1.5rem] border border-white/8 bg-white/[0.03] p-5 text-sm text-white/58">
-              <div className="flex items-start gap-3">
-                <CircleCheckBig className="mt-1 h-5 w-5 text-[#d9b15f]" />
-                <p>
-                  Verified listings only go live after admin approval. If you need faster turnaround,
-                  include complete room counts, clear property photos, and a precise address.
-                </p>
+              <div className="grid gap-6 lg:grid-cols-2">
+                {testimonials.slice(0, 2).map((testimonial) => (
+                  <article key={testimonial.name} className="surface-panel p-6">
+                    <p className="text-xs uppercase tracking-[0.26em] text-[#f0d899]">{testimonial.result}</p>
+                    <p className="mt-4 font-display text-4xl text-white">
+                      “{testimonial.quote}”
+                    </p>
+                    <div className="mt-5 text-sm text-white/58">
+                      <p className="font-semibold text-white">{testimonial.name}</p>
+                      <p>{testimonial.role}</p>
+                      <p>{testimonial.location}</p>
+                    </div>
+                  </article>
+                ))}
               </div>
             </div>
 
-            <div className="mt-6 text-sm text-white/50">
-              Need to browse instead?{' '}
-              <Link href="/properties" className="text-[#f0d899] hover:text-white">
-                View verified properties
+            <div className="mt-8">
+              <Link
+                href="/testimonials"
+                className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-[#f0d899] transition-colors hover:text-white"
+              >
+                Read all testimonials
+                <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </div>
         </section>
+
+        <section className="border-y border-white/6 py-18">
+          <div className="section-shell">
+            <div className="surface-panel px-6 py-8 md:px-8">
+              <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+                <div>
+                  <div className="eyebrow">Scarcity</div>
+                  <h2 className="mt-5 font-display text-5xl text-white sm:text-6xl">
+                    Limited listing slots per area.
+                  </h2>
+                  <p className="mt-4 max-w-2xl text-base leading-8 text-white/68">
+                    We focus on quality listings to ensure faster sales. That means we limit how many similar houses we actively push within the same area at a time.
+                  </p>
+                </div>
+
+                <div className="soft-card p-6">
+                  <p className="text-xs uppercase tracking-[0.28em] text-white/45">Why it matters</p>
+                  <ul className="mt-4 space-y-4 text-sm leading-7 text-white/72">
+                    <li className="flex items-start gap-3">
+                      <BadgeCheck className="mt-1 h-4 w-4 shrink-0 text-[#d9b15f]" />
+                      Cleaner attention on each listing instead of volume overload.
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <BadgeCheck className="mt-1 h-4 w-4 shrink-0 text-[#d9b15f]" />
+                      Better follow-up quality with fewer weak leads.
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <BadgeCheck className="mt-1 h-4 w-4 shrink-0 text-[#d9b15f]" />
+                      Stronger control over presentation and buyer experience.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section-shell py-16">
+          <div className="surface-panel flex flex-col gap-8 px-6 py-8 md:flex-row md:items-center md:justify-between md:px-8">
+            <div>
+              <p className="text-xs uppercase tracking-[0.28em] text-white/45">Strong CTA</p>
+              <h2 className="mt-2 font-display text-4xl text-white sm:text-5xl">
+                Ready to sell your property faster?
+              </h2>
+            </div>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="#owner-form"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#d9b15f] px-7 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-[#111111]"
+              >
+                Submit Your Property Now
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/14 px-7 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-white/82 transition-colors hover:border-[#d9b15f]/35 hover:text-[#f2dca3]"
+              >
+                <MessageCircleMore className="h-4 w-4" />
+                Talk to Us on WhatsApp
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section id="owner-form" className="section-shell py-4">
+          <div className="mb-10 max-w-3xl">
+            <div className="eyebrow">Lead capture</div>
+            <h2 className="mt-5 font-display text-5xl text-white sm:text-6xl">
+              Submit your house details.
+            </h2>
+            <p className="mt-4 text-base leading-8 text-white/68">
+              Keep it simple. Share the essentials and we will review the house for listing.
+            </p>
+          </div>
+
+          <OwnerLeadForm />
+        </section>
       </main>
+
+      <a
+        href={WHATSAPP_URL}
+        target="_blank"
+        rel="noreferrer"
+        className="fixed bottom-5 right-5 z-50 inline-flex items-center gap-3 rounded-full border border-[#25D366]/20 bg-[#25D366] px-5 py-3 text-sm font-semibold text-[#08150c] shadow-[0_18px_45px_rgba(0,0,0,0.35)] transition-transform duration-300 hover:-translate-y-0.5"
+      >
+        <MessageCircleMore className="h-4 w-4" />
+        WhatsApp
+      </a>
+
+      <div
+        className={`fixed inset-x-0 bottom-0 z-40 border-t border-[#d9b15f]/12 bg-[#080808]/94 px-4 py-3 backdrop-blur-xl transition-transform duration-300 md:px-6 ${
+          showStickyCta ? 'translate-y-0' : 'translate-y-full'
+        }`}
+      >
+        <div className="mx-auto flex max-w-7xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="text-xs uppercase tracking-[0.26em] text-white/45">Ready to list?</p>
+            <p className="text-sm text-white/72">Reach serious buyers faster with a stronger listing process.</p>
+          </div>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Link
+              href="#owner-form"
+              className="inline-flex items-center justify-center rounded-full bg-[#d9b15f] px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-[#111111]"
+            >
+              List Your Property
+            </Link>
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-center rounded-full border border-white/14 px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white/82"
+            >
+              WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
     </>
   )
 }

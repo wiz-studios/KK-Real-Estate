@@ -6,10 +6,9 @@ import { Logo } from './logo'
 
 const navLinks = [
   { href: '/properties', label: 'Properties' },
-  { href: '/testimonials', label: 'Testimonials' },
   { href: '/submit-listing', label: 'Submit Listing' },
-  { href: '/#how-it-works', label: 'How It Works' },
-  { href: '/#owner-form', label: 'Sell With Us' },
+  { href: '/#experience', label: 'Experience' },
+  { href: '/#founder', label: 'Founder' },
 ]
 
 export function TrustHeader() {
@@ -42,10 +41,10 @@ export function TrustHeader() {
             </nav>
 
             <Link
-              href="/#owner-form"
+              href="/properties"
               className="inline-flex items-center gap-2 rounded-full bg-[#d9b15f] px-4 py-2.5 text-sm font-semibold text-[#111111] transition-transform duration-300 hover:-translate-y-0.5"
             >
-              List Your Property
+              Explore
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
