@@ -1,6 +1,7 @@
 export interface SubmissionContactDetails {
   isPublicSubmission: boolean
   isShowcaseLead: boolean
+  isOwnerLead: boolean
   contactName?: string
   contactEmail?: string
   contactPhone?: string
@@ -19,6 +20,7 @@ export function parseSubmissionContactDetails(notes?: string | null): Submission
   return {
     isPublicSubmission: safeNotes.includes('Public submission awaiting admin review.'),
     isShowcaseLead: safeNotes.includes('Showcase Lead Source:'),
+    isOwnerLead: safeNotes.includes('Owner Lead Source: Seller Landing Page'),
     contactName: extractLineValue(safeNotes, 'Contact Name'),
     contactEmail: extractLineValue(safeNotes, 'Contact Email'),
     contactPhone: extractLineValue(safeNotes, 'Contact Phone'),

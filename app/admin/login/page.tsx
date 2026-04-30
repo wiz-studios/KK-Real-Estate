@@ -14,7 +14,6 @@ export default function AdminLoginPage() {
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Redirect if already logged in as admin
   useEffect(() => {
     if (!isLoading && session.isAuthenticated && session.isAdmin) {
       router.push('/admin/dashboard');
@@ -42,16 +41,13 @@ export default function AdminLoginPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center px-4">
       <div className="w-full max-w-md">
-        {/* Logo */}
         <div className="text-center mb-8">
           <Logo size="lg" showText={false} className="mx-auto mb-4" />
           <h1 className="text-3xl font-bold text-white">Admin Portal</h1>
           <p className="text-gray-400 mt-2">KK Real Estate Management</p>
         </div>
 
-        {/* Login Card */}
         <div className="bg-white rounded-lg border border-gray-200 p-8 shadow-lg">
-          {/* Error Alert */}
           {error && (
             <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
               <AlertCircle className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" />
@@ -59,9 +55,7 @@ export default function AdminLoginPage() {
             </div>
           )}
 
-          {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Email */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                 Email Address
@@ -74,13 +68,12 @@ export default function AdminLoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="admin@kkestates.com"
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                  className="w-full rounded-lg border border-gray-300 py-3 pl-10 pr-4 text-black placeholder:text-gray-400 focus:border-transparent focus:ring-2 focus:ring-yellow-500"
                   disabled={isSubmitting}
                 />
               </div>
             </div>
 
-            {/* Password */}
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
                 Password
@@ -93,13 +86,12 @@ export default function AdminLoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                  className="w-full rounded-lg border border-gray-300 py-3 pl-10 pr-4 text-black placeholder:text-gray-400 focus:border-transparent focus:ring-2 focus:ring-yellow-500"
                   disabled={isSubmitting}
                 />
               </div>
             </div>
 
-            {/* Submit Button */}
             <button
               type="submit"
               disabled={isSubmitting}
@@ -109,7 +101,6 @@ export default function AdminLoginPage() {
             </button>
           </form>
 
-          {/* Divider */}
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-gray-300"></div>
@@ -119,7 +110,6 @@ export default function AdminLoginPage() {
             </div>
           </div>
 
-          {/* Info */}
           <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-800">
             <p className="font-medium mb-2">Admin Access Only</p>
             <ul className="list-disc list-inside space-y-1 text-xs">
@@ -131,7 +121,6 @@ export default function AdminLoginPage() {
           </div>
         </div>
 
-        {/* Public Link */}
         <div className="text-center mt-8">
           <p className="text-gray-400">
             Looking for properties?{' '}

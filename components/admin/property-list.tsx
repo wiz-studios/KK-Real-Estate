@@ -104,13 +104,17 @@ export function PropertyList({ properties, isLoading, onDelete }: PropertyListPr
                           className={`rounded-full px-2.5 py-1 text-xs font-semibold ${
                             submissionDetails.isPublicSubmission
                               ? 'bg-amber-100 text-amber-800'
+                              : submissionDetails.isOwnerLead
+                                ? 'bg-indigo-100 text-indigo-800'
                               : submissionDetails.isShowcaseLead
                                 ? 'bg-blue-100 text-blue-800'
-                              : 'bg-slate-100 text-slate-700'
+                                : 'bg-slate-100 text-slate-700'
                           }`}
                         >
                           {submissionDetails.isPublicSubmission
                             ? 'Public submission'
+                            : submissionDetails.isOwnerLead
+                              ? 'Owner lead'
                             : submissionDetails.isShowcaseLead
                               ? 'Showcase inquiry'
                               : 'Admin added'}
